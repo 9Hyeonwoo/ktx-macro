@@ -168,6 +168,7 @@ const macro = () => {
 
 const reload = () => {
   document.querySelector(".btn_inq > a").click();
+  setTimeout(checkWaitings, 1000);
 };
 
 const saveCheckboxState = () => {
@@ -184,6 +185,16 @@ const saveCheckboxState = () => {
     localStorage.setItem("checkedItems", checkedItems.join(","));
   } else {
     localStorage.removeItem("checkedItems");
+  }
+};
+
+const checkWaitings = () => {
+  let waitingPopup = document.querySelectorAll("[id='NetFunnel_Loading_Popup']")[0];
+  if (waitingPopup != undefined) {
+    let myJavaScript = "window.NetFunnel.gControl.next.success({}, {data:{}});";
+    let scriptTag = document.createElement("script");
+    scriptTag.innerHTML = myJavaScript;
+    document.head.appendChild(scriptTag);
   }
 };
 
